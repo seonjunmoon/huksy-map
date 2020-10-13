@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+   <p>This html file makes the following query to the server: <pre><code>{ullat: 47.655195, ullon: -122.309108, lrlat: 47.651298, lrlon: -122.301519, depth: 7}</code></pre></p>
+   <p>The expected raster result is: <pre><code>{ullat: 47.65600769891789, ullon: -122.310791015625, lrlat: 47.65045541887475, lrlon: -122.2998046875, success: true}</code></pre></p>
+   <p>The image output of your program is shown below (will be blank if your server isn't running or working properly):</p>
+   <img id="map">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+   <script>
+       $.get({
+           async: true,
+           url: "http://localhost:8080/raster",
+           data: {
+                   ullat: 47.655195,
+                   ullon: -122.309108,
+                   lrlat: 47.651298,
+                   lrlon: -122.301519,
+                   depth: 7
+                  },
+           success: function(data) {
+               map.src = "data:image/png;base64," + data.image;
+           },
+           dataType: "json"
+       });
+   </script>
+   <p>The correct output should be:</p>
+   <img src="testSmallDepth7.png">
+   <p>If your image looks different (or is blank), your implementation is not correct.</p>
+</body>
+</html>
